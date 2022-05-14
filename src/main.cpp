@@ -4,6 +4,6 @@
 
 int main()
 {
-    std::cout << "version: " << concordance_VERSION_MAJOR << '.' << concordance_VERSION_MINOR << std::endl;
+    std::cout << "version (MAJ.MIN): " << concordance_VERSION_MAJOR << '.' << concordance_VERSION_MINOR << std::endl;
     return 0;
 }
