@@ -33,7 +33,7 @@ jobs:
 
     - name: Analyze
       run: |
-        run-clang-tidy -p build -p1 -export-fixes build/fixes.yml
+        run-clang-tidy -p build -export-fixes build/fixes.yml
 
     - name: Run clang-tidy-pr-comments action
       uses: platisd/clang-tidy-pr-comments@master
