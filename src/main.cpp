@@ -5,15 +5,18 @@
 #include "config.h"
 
 static int
-generate_concordance(const std::filesystem::path& /*lmao*/)
+generate_concordance(const std::filesystem::path& path_input) 
 {
+    (void) path_input;
   return 0;
 }
 
 static int
-verify_concordance(const std::filesystem::path& /*lmao*/,
-                   const std::filesystem::path& /*lol*/)
+verify_concordance(const std::filesystem::path& path_input,
+                   const std::filesystem::path& path_expected)
 {
+    (void)path_input;
+    (void)path_expected;
   return 0;
 }
 
