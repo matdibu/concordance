@@ -23,10 +23,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           style: file
-          tidy-checks:
           version: 14
           lines-changed-only: false
           files-changed-only: false
+          database: 'build'
+          excluded: 'build'
 
       - name: Fail fast
         if: steps.linter.outputs.checks-failed > 0
