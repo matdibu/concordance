@@ -5,15 +5,18 @@
 #include "config.h"
 
 static int
-generate_concordance(const std::filesystem::path& /*lmao*/)
+generate_concordance(const std::filesystem::path& path_input) 
 {
+    (void) path_input;
   return 0;
 }
 
 static int
-verify_concordance(const std::filesystem::path& /*lmao*/,
-                   const std::filesystem::path& /*lol*/)
+verify_concordance(const std::filesystem::path& path_input,
+                   const std::filesystem::path& path_expected)
 {
+    (void)path_input;
+    (void)path_expected;
   return 0;
 }
 
@@ -33,9 +36,6 @@ main(int argc, char* argv[])
       std::filesystem::path expected(
         argv[2]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
       ret = verify_concordance(input, expected);
-    }
-    else {
-      std::cerr << "no input file given" << std::endl;
     }
   } catch (const std::exception& exc) {
     std::cerr << "exception in main " << exc.what() << std::endl;
