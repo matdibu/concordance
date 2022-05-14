@@ -1,6 +1,7 @@
 #include "config.h"
 
 #include <iostream>
+#include <algorithm>
 
 int main()
 {
