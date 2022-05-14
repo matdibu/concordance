@@ -1,7 +1,7 @@
 #include "config.h"
 
-#include <set>
 #include <iostream>
+#include <set>
 #include <algorithm>
 
 int main()
