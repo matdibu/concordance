@@ -2,14 +2,15 @@ name: clang-tidy-review
 
 on: [ pull_request ]
 
-permissions: write-all
-
 env:
   BUILD_TYPE: Debug
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
 
     steps:
     - uses: actions/checkout@v3
