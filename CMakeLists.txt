@@ -38,6 +38,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 set(Tests 
     basic_run 
     hello_world
+    two_words_in_two_sentences
 )
 
 foreach(test ${Tests})
