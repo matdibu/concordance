@@ -24,8 +24,6 @@ add_compile_definitions(
    $<$<CONFIG:RELEASE>:NDEBUG>
 )
 
-set(CMAKE_CXX_CLANG_TIDY clang-tidy)
-
 add_executable(${PROJECT_NAME} src/main.cpp ${HEADER_FILES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}")

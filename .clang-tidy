@@ -1,3 +1,4 @@
 ---
 Checks: '*,-llvmlibc*,-modernize-use-trailing-return-type'
+FormatStyle: file
 ...
