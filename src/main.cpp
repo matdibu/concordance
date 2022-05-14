@@ -30,13 +30,13 @@ main(int argc, char* argv[])
       std::cerr    
                           << "no input file given" << std::endl;
     } else if (argc == 2) {
-      std::filesystem::path input = argv[1]; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+      std::filesystem::path input(argv[1]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
       ret = generate_concordance(input);
     } else if (argc == 3) {
-      std::filesystem::path input =
-        argv[1]; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
-      std::filesystem::path expected =
-        argv[2]; // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+      std::filesystem::path input(
+        argv[1]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+      std::filesystem::path expected(
+        argv[2]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
       ret = verify_concordance(input, expected);
     }
   } catch (const std::exception& exc) {
