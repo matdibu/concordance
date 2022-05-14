@@ -1,7 +1,7 @@
 #include "config.h"
 
 #include <algorithm>
-#include <algorithm>
+#include <cstdio>
 #include <cstdio>
 #include <iostream>
 
