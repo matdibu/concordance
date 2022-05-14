@@ -10,4 +10,3 @@ jobs:
       - uses: RafikFarhad/clang-format-github-action@v2.1.0
         with:
           style: "file"
-          sources: "src/**/*.hpp,src/**/*.cpp,test/**/*.c"
