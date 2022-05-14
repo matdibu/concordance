@@ -1,4 +1,4 @@
-1 : Hello
-1 : world.
-2 : Hi
-2 : there.
+Hello {1:1}
+Hi {1:2}
+there. {1:2}
+world. {1:1}

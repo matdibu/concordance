@@ -1,22 +1,43 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 
 #include "config.h"
 
 static std::string
+occurs_to_comma_list(const std::map<std::size_t, std::size_t>& occur_map)
+{
+  std::ostringstream result_stream;
+
+  bool is_first = true;
+  for (const auto& map_pair : occur_map) {
+      const auto sentence_no = map_pair.first;
+    if (!is_first) {
+      result_stream << "," << sentence_no;
+    } else {
+      result_stream << sentence_no;
+      is_first = false;
+    }
+  }
+
+  return result_stream.str();
+}
+
+static std::string
 gen_con(const std::filesystem::path& path_input)
 {
-
   if (!std::filesystem::exists(path_input)) {
     throw std::runtime_error("input file path is invalid");
   }
 
-  std::ostringstream result_stream;
+  std::map<std::string, std::map<std::size_t, std::size_t>> occur;
+
   std::ifstream file_input(path_input);
-  // file_input.exceptions(std::ios_base::badbit | std::ios_base::failbit);
+
   std::string prev;
   std::string word;
   std::size_t sentence_count = 1;
@@ -30,9 +51,18 @@ gen_con(const std::filesystem::path& path_input)
       }
     }
 
-    std::cout << sentence_count << " : " << word << std::endl;
-    result_stream << sentence_count << " : " << word << std::endl;
+    occur[word][sentence_count]++;
+
     prev = word;
+  }
+
+  std::ostringstream result_stream;
+  for (const auto& occ : occur) {
+    std::size_t total_occur = 0;
+    for (const auto freq : occ.second) {
+      total_occur += freq.second;
+    }
+    result_stream << occ.first << " {" << total_occur << ":" << occurs_to_comma_list(occ.second) << "}" << std::endl;
   }
 
   return result_stream.str();
