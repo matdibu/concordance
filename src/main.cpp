@@ -34,6 +34,9 @@ main(int argc, char* argv[])
         argv[2]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
       ret = verify_concordance(input, expected);
     }
+    else {
+      std::cerr << "no input file given" << std::endl;
+    }
   } catch (const std::exception& exc) {
     std::cerr << "exception in main " << exc.what() << std::endl;
     ret = -1;
