@@ -2,7 +2,7 @@ name: clang-tidy-review
 
 on: [ pull_request ]
 
-permissions: read-all
+permissions: read-all|write-all
 
 env:
   BUILD_TYPE: Debug
