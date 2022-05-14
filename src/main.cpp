@@ -37,6 +37,7 @@ gen_con(const std::filesystem::path& path_input)
   std::map<std::string, std::map<std::size_t, std::size_t>> occur;
 
   std::ifstream file_input(path_input);
+
   std::string prev;
   std::string word;
   std::size_t sentence_count = 1;
