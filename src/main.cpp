@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <cstdio>
-#include <cstdio>
+#include <iostream>
 #include <vector>
 
 int main()
