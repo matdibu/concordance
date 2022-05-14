@@ -1,4 +1,4 @@
 ---
-Checks: '*,-llvmlibc*,-modernize-use-trailing-return-type'
+Checks: '*,-llvmlibc*,-modernize-use-trailing-return-type,-fuchsia-default-arguments-calls'
 FormatStyle: file
 ...
