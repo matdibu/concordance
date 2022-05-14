@@ -26,7 +26,7 @@ jobs:
           version: 14
           lines-changed-only: false
           files-changed-only: false
-          database: 'build'
+          database: 'build/compile_commands.json'
           ignore: 'build'
 
       - name: Fail fast
