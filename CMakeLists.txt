@@ -9,7 +9,7 @@ configure_file(include/config.h.in config.h)
 enable_testing()
 
 add_compile_options(
-    -Wall -Wextra -Werror 
+    -Wall -Wextra -Werror
     $<$<CONFIG:RELEASE>:-O3>
     $<$<CONFIG:DEBUG>:-ggdb3>
 )
@@ -17,6 +17,7 @@ add_compile_options(
 if (CMAKE_CXX_COMPILER_ID STREQUAL Clang)
     add_compile_options(
         -Weverything
+        -Wno-c++98-compat
     )
 endif(CMAKE_CXX_COMPILER_ID STREQUAL Clang)
 
@@ -30,9 +31,17 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     EXPORT_COMPILE_COMMANDS ON
-    CXX_STANDARD 17
+    CXX_STANDARD 20
     CXX_STANDARD_REQUIRED True
 )
 
-add_test(NAME basic_run COMMAND ${PROJECT_NAME})
+set(Tests 
+    basic_run 
+    hello_world
+    two_words_in_two_sentences
+)
+
+foreach(test ${Tests})
+    add_test(NAME ${test} COMMAND ${PROJECT_NAME} ../tests/${test}/input ../tests/${test}/output)
+endforeach()
 
