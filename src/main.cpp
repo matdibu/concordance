@@ -1,5 +1,6 @@
 #include "config.h"
 
+#include <vector>
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
