@@ -1,8 +1,8 @@
 #include "config.h"
 
 #include <set>
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
 
 int main()
 {
