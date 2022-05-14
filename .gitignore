@@ -1,2 +1,7 @@
+# the build directory
 build
+
+# language server caches
 .ccls-cache
+.cache
+

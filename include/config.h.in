@@ -1,0 +1,3 @@
+#define concordance_VERSION_MAJOR @concordance_VERSION_MAJOR@
+#define concordance_VERSION_MINOR @concordance_VERSION_MINOR@
+
