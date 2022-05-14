@@ -1,6 +1,6 @@
 name: clang-tidy-review
 
-on: [ pull_request push ]
+on: [ pull_request, push ]
 
 env:
   BUILD_TYPE: Debug
