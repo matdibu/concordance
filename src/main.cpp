@@ -21,7 +21,8 @@ int
 main(int argc, char* argv[])
 {
   int ret = 0;
-  try {
+  try
+  {
     if (argc < 2) {
       std::cerr << "no input file given" << std::endl;
     } else if (argc == 2) {
