@@ -1,0 +1,26 @@
+name: cpp-linter
+
+on:
+  pull_request:
+    types: [opened, reopened]  # let PR-synchronize events be handled by push events
+  push:
+
+jobs:
+  cpp-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cpp-linter/cpp-linter-action@v1
+        id: linter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          style: file
+          tidy-checks:
+          version: 14
+          lines-changed-only: false
+          files-changed-only: false
+
+      - name: Fail fast
+        if: steps.linter.outputs.checks-failed > 0
+        run: exit 1
