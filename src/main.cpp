@@ -1,5 +1,6 @@
 #include "config.h"
 
+#include <ostream>
 #include <iostream>
 
 int main()
