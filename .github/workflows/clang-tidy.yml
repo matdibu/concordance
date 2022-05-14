@@ -18,7 +18,6 @@ jobs:
       with:
         fetch-depth: 0
 
-
     - name: Intall clang-tidy
       run: |
         sudo apt-get update
@@ -32,19 +31,14 @@ jobs:
       run: |
         cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
-    - name: Create results directory
-      run: |
-        mkdir clang-tidy-result
-
     - name: Analyze
       run: |
-        git diff -U1 HEAD^ | clang-tidy-diff -p1 -path build -export-fixes clang-tidy-result/fixes.yml
+        run-clang-tidy -p build -p1 -export-fixes build/fixes.yml
 
     - name: Run clang-tidy-pr-comments action
       uses: platisd/clang-tidy-pr-comments@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        clang_tidy_fixes: clang-tidy-result/fixes.yml
-        request_changes: true
-        suggestions_per_comment: 10
+        clang_tidy_fixes: build/fixes.yml
+        suggestions_per_comment: 25
 
