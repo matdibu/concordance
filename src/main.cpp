@@ -1,7 +1,5 @@
 #include "config.h"
 
-#include <vector>
-#include <ostream>
 #include <iostream>
 #include <algorithm>
 
