@@ -1,11 +1,11 @@
 #include "config.h"
 
-#include <iostream>
 #include <algorithm>
-#include <vector>
+#include <iostream>
+#include <cstdio>
 
 int main()
 {
-    std::cout << "version (MAJ.MIN): " << concordance_VERSION_MAJOR << '.' << concordance_VERSION_MINOR << std::endl;
+    printf("version: %d.%d", concordance_VERSION_MAJOR, concordance_VERSION_MINOR);
     return 0;
 }
