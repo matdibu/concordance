@@ -6,6 +6,6 @@
 
 int main()
 {
-    printf("version: %d.%d", concordance_VERSION_MAJOR, concordance_VERSION_MINOR);
+    std::cout << "version is " << concordance_VERSION_MAJOR << "." << concordance_VERSION_MINOR << std::endl;
     return 0;
 }
