@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-set(VERSION 1.0.0)
+set(VERSION 0.1.0)
 
 project(concordance VERSION ${VERSION} LANGUAGES CXX)
 
@@ -35,3 +35,4 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 add_test(NAME basic_run COMMAND ${PROJECT_NAME})
+
