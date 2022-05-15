@@ -2,5 +2,5 @@
 Language: Cpp
 BasedOnStyle: Mozilla
 
-ColumnLimit: 130
+ColumnLimit: 90
 ...
