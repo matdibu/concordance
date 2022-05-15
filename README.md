@@ -3,6 +3,12 @@
 
 Create an alphabetical list of all word occurrences, labeled with word frequencies.
 
+Build prerequisites
+-------------------
+
+- Clang or GCC with c++20 support
+- CMake version 3.20+
+
 Build from source
 -----------------
 
