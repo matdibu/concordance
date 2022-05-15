@@ -22,12 +22,15 @@ occurs_to_comma_list(const sentence_freq_t& occurance_map)
   for (const auto& sentence_occurances_pair : occurance_map) {
 
     const auto sentence_no = sentence_occurances_pair.first;
+    auto occurences = sentence_occurances_pair.second;
 
-    if (!is_first) {
-      result_stream << "," << sentence_no;
-    } else {
-      result_stream << sentence_no;
-      is_first = false;
+    while (occurences-- > 0) {
+      if (!is_first) {
+        result_stream << "," << sentence_no;
+      } else {
+        result_stream << sentence_no;
+        is_first = false;
+      }
     }
   }
 
@@ -35,11 +38,11 @@ occurs_to_comma_list(const sentence_freq_t& occurance_map)
 }
 
 constexpr static bool
-is_sententce_transition(const std::string& prev, const std::string& word)
+is_sententce_transition(const std::string& lhs, const std::string& rhs)
 {
-  if (prev.ends_with('.')) {
-    if (!word.empty()) {
-      if (0 != std::isupper(word.at(0))) {
+  if (lhs.ends_with('.')) {
+    if (!rhs.empty()) {
+      if (0 != std::isupper(rhs.at(0))) {
         return true;
       }
     }
@@ -48,24 +51,49 @@ is_sententce_transition(const std::string& prev, const std::string& word)
   return false;
 }
 
+static void to_lower(std::string& string)
+{
+    std::transform(string.begin(), string.end(), string.begin(), [](unsigned char chr) {
+      return std::tolower(chr);
+    });
+}
+
 static occurance_map_t
 file_to_occurance_map(std::ifstream& file_input)
 {
   occurance_map_t occurance_map;
 
-  std::string prev;
   std::string word;
+  std::string next;
   std::size_t sentence_count = 1;
 
-  while (file_input >> word) {
+  file_input >> word;
+  while (file_input >> next) {
 
-    if (is_sententce_transition(prev, word)) {
-      sentence_count++;
+    const bool is_sententce_tran = is_sententce_transition(word, next);
+
+    to_lower(word);
+
+    if (is_sententce_tran || word.ends_with(',') || word.ends_with(':'))
+    {
+      word.erase(word.length() - 1);
     }
 
     occurance_map[word][sentence_count]++;
 
-    std::swap(prev, word);
+    if (is_sententce_tran)
+    {
+        sentence_count++;
+    }
+
+    word = next;
+  }
+
+  if (!next.empty()) {
+    if (next.ends_with('.')) {
+      next.erase(next.length() - 1);
+    }
+    occurance_map[next][sentence_count]++;
   }
 
   return occurance_map;
@@ -83,6 +111,7 @@ count_occurances(const sentence_freq_t& occurance_map)
   return total_occurrances;
 }
 
+#if 1
 static std::ostream&
 operator<<(std::ostream& ostream, const occurance_map_t::value_type& occurance_pair)
 {
@@ -94,6 +123,7 @@ operator<<(std::ostream& ostream, const occurance_map_t::value_type& occurance_p
 
   return ostream;
 }
+#endif
 
 static std::string
 occurance_map_to_string(const occurance_map_t& occurance_map)
@@ -102,6 +132,13 @@ occurance_map_to_string(const occurance_map_t& occurance_map)
 
   for (const auto& occurance_pair : occurance_map) {
     result_stream << occurance_pair << std::endl;
+    //const auto word = occurance_pair.first;
+    //const auto occurances = count_occurances(occurance_pair.second);
+    //const auto occurance_list = occurs_to_comma_list(occurance_pair.second);
+
+    //std::cout << word << " {" << occurances << ":" << occurance_list << "}" << std::endl;
+
+    //result_stream << word << " {" << occurances << ":" << occurance_list << "}" << std::endl;
   }
 
   return result_stream.str();
@@ -176,9 +213,9 @@ run_main(int argc, char* argv[])
     if (args.size() < 2) {
       std::cerr << "no input file given" << std::endl;
     } else if (args.size() == 2) {
-      ret = one_arg(args[0]);
+      ret = one_arg(args[1]);
     } else if (args.size() == 3) {
-      ret = two_arg(args[0], args[1]);
+      ret = two_arg(args[1], args[2]);
     }
   } catch (const std::ios_base::failure& fail) {
     std::cout << "exc code:" << fail.code() << " : " << fail.what() << std::endl;
