@@ -39,6 +39,7 @@ set(Tests
     basic_run 
     hello_world
     two_words_in_two_sentences
+    problem_statement
 )
 
 foreach(test ${Tests})
