@@ -54,7 +54,7 @@ is_sententce_transition(const std::string& lhs, const std::string& rhs)
 [[nodiscard]] static std::string
 to_lower(const std::string& string)
 {
-  std::string result;
+  std::string result(string.length(), '\0');
 
   std::transform(string.begin(), string.end(), result.begin(), [](unsigned char chr) {
     return std::tolower(chr);
