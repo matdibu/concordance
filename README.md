@@ -1,5 +1,5 @@
 # concordance
-[![build](https://github.com/matdibu/concordance/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/matdibu/concordance/actions/workflows/build.yml)
+[![build-and-test](https://github.com/matdibu/concordance/actions/workflows/build-and-test.yaml/badge.svg?branch=master&event=push)](https://github.com/matdibu/concordance/actions/workflows/build-and-test.yaml)
 
 Create an alphabetical list of all word occurrences, labeled with word frequencies.
 
