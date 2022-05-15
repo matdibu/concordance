@@ -8,42 +8,40 @@
 #include <vector>
 
 static int
-two_arg(const std::filesystem::path& path_input,
-        const std::filesystem::path& path_expected)
+compare_with_expected(
+  const std::string& path_input, // NOLINT(bugprone-easily-swappable-parameters)
+  const std::string& path_expected)
 {
-  auto computed_str = path_to_concordance_string(path_input);
-  std::cout << "gen_con result: " << std::endl << computed_str << std::endl;
-  auto computed = std::istringstream(computed_str);
-
   if (!std::filesystem::exists(path_expected)) {
-    throw std::runtime_error("expected file path is invalid");
+    std::cerr << "file " << path_expected << " does not exist" << std::endl;
+    return -1;
   }
-  std::ifstream file_expected(path_expected);
 
-  file_expected.seekg(0, std::ifstream::end);
-  if (const auto file_size = static_cast<std::size_t>(file_expected.tellg());
-      file_size != computed_str.length()) {
-    std::cout << "file_expected:" << file_size
+  const auto computed_str = path_to_concordance_string(path_input);
+  const auto file_size = std::filesystem::file_size(path_expected);
+  if (file_size != computed_str.length()) {
+    std::cerr << "different sizes, file_expected:" << file_size
               << " computed_str:" << computed_str.length() << std::endl;
     return -1;
   }
-  file_expected.seekg(0, std::ifstream::beg);
 
-  const bool is_equal = std::equal(std::istreambuf_iterator<char>(file_expected.rdbuf()),
-                                   std::istreambuf_iterator<char>(),
-                                   std::istreambuf_iterator<char>(computed.rdbuf()));
+  std::ifstream file_expected(path_expected);
+  const auto computed_stream = std::istringstream(computed_str);
+  const bool is_equal =
+    std::equal(std::istreambuf_iterator<char>(file_expected.rdbuf()),
+               std::istreambuf_iterator<char>(),
+               std::istreambuf_iterator<char>(computed_stream.rdbuf()));
 
   return is_equal ? 0 : 1;
 }
 
 int
-one_arg(const std::filesystem::path& path_input)
+print_concordance(const std::string& path_input)
 {
   auto result = path_to_concordance_string(path_input);
-  std::cout << "gen_con result: " << std::endl << result << std::endl;
+  std::cout << "result: " << std::endl << result << std::endl;
   return 0;
 }
-
 
 int
 main(int argc, char* argv[])
@@ -52,14 +50,14 @@ main(int argc, char* argv[])
 
   try {
 
-    std::vector<std::string> args(argv, argv + argc);
+    const std::vector<std::string> args(argv, argv + argc);
 
     if (args.size() < 2) {
       std::cerr << "no input file given" << std::endl;
     } else if (args.size() == 2) {
-      ret = one_arg(args[1]);
+      ret = print_concordance(args[1]);
     } else if (args.size() == 3) {
-      ret = two_arg(args[1], args[2]);
+      ret = compare_with_expected(args[1], args[2]);
     }
   } catch (const std::ios_base::failure& fail) {
     std::cout << "exc code:" << fail.code() << " : " << fail.what() << std::endl;
