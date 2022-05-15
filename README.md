@@ -6,16 +6,15 @@ Create an alphabetical list of all word occurrences, labeled with word frequenci
 Build from source
 -----------------
 
-`mkdir build`
-`cd build`
-`cmake ..`
-`make`
+    mkdir build
+    cd build
+    cmake ..
+    make
 
 Run tests
 ---------
 
-`mkdir build`
-`cd build`
-`cmake ..`
-`make`
-`make test`
+First, build it, then:
+
+    make test
+
