@@ -51,7 +51,7 @@ is_sententce_transition(const std::string& lhs, const std::string& rhs)
   return false;
 }
 
-[[nodiscard("Pure function")]] static std::string
+[[nodiscard]] static std::string
 to_lower(const std::string& string)
 {
   std::string result;
