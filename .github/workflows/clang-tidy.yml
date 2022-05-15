@@ -22,10 +22,9 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Intall clang-tidy
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y clang-tidy
+    - uses: egor-tensin/setup-gcc@v1
+
+    - uses: uses: KyleMayes/install-llvm-action@v1.5.2
 
     - name: Configure CMake
       run: |
