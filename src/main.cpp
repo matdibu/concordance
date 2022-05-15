@@ -51,11 +51,16 @@ is_sententce_transition(const std::string& lhs, const std::string& rhs)
   return false;
 }
 
-static void to_lower(std::string& string)
+[[nodiscard("Pure function")]] static std::string
+to_lower(const std::string& string)
 {
-    std::transform(string.begin(), string.end(), string.begin(), [](unsigned char chr) {
-      return std::tolower(chr);
-    });
+  std::string result;
+
+  std::transform(string.begin(), string.end(), result.begin(), [](unsigned char chr) {
+    return std::tolower(chr);
+  });
+
+  return result;
 }
 
 static occurance_map_t
@@ -72,18 +77,16 @@ file_to_occurance_map(std::ifstream& file_input)
 
     const bool is_sententce_tran = is_sententce_transition(word, next);
 
-    to_lower(word);
+    word = to_lower(word);
 
-    if (is_sententce_tran || word.ends_with(',') || word.ends_with(':'))
-    {
+    if (is_sententce_tran || word.ends_with(',') || word.ends_with(':')) {
       word.erase(word.length() - 1);
     }
 
     occurance_map[word][sentence_count]++;
 
-    if (is_sententce_tran)
-    {
-        sentence_count++;
+    if (is_sententce_tran) {
+      sentence_count++;
     }
 
     word = next;
@@ -111,8 +114,7 @@ count_occurances(const sentence_freq_t& occurance_map)
   return total_occurrances;
 }
 
-#if 1
-static std::ostream&
+static std::ostream& // NOLINT(fuchsia-overloaded-operator)
 operator<<(std::ostream& ostream, const occurance_map_t::value_type& occurance_pair)
 {
   const auto word = occurance_pair.first;
@@ -123,7 +125,6 @@ operator<<(std::ostream& ostream, const occurance_map_t::value_type& occurance_p
 
   return ostream;
 }
-#endif
 
 static std::string
 occurance_map_to_string(const occurance_map_t& occurance_map)
@@ -132,13 +133,6 @@ occurance_map_to_string(const occurance_map_t& occurance_map)
 
   for (const auto& occurance_pair : occurance_map) {
     result_stream << occurance_pair << std::endl;
-    //const auto word = occurance_pair.first;
-    //const auto occurances = count_occurances(occurance_pair.second);
-    //const auto occurance_list = occurs_to_comma_list(occurance_pair.second);
-
-    //std::cout << word << " {" << occurances << ":" << occurance_list << "}" << std::endl;
-
-    //result_stream << word << " {" << occurances << ":" << occurance_list << "}" << std::endl;
   }
 
   return result_stream.str();
@@ -201,8 +195,8 @@ two_arg(const std::filesystem::path& path_input,
   return is_equal ? 0 : 1;
 }
 
-static int
-run_main(int argc, char* argv[])
+int
+main(int argc, char* argv[])
 {
   int ret = 0;
 
@@ -225,10 +219,4 @@ run_main(int argc, char* argv[])
   }
 
   return ret;
-}
-
-int
-main(int argc, char* argv[])
-{
-  return run_main(argc, argv);
 }
