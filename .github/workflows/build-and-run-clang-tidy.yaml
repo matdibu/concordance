@@ -23,6 +23,8 @@ jobs:
         fetch-depth: 0
 
     - uses: egor-tensin/setup-gcc@v1
+      with:
+        version: 11
 
     - uses: KyleMayes/install-llvm-action@v1.5.2
       with:
