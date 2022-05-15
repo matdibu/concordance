@@ -50,7 +50,7 @@ main(int argc, char* argv[])
 
   try {
 
-    const std::vector<const std::string> args(argv, argv + argc);
+    const std::vector<std::string> args(argv, argv + argc);
 
     if (args.size() < 2) {
       std::cerr << "no input file given" << std::endl;
