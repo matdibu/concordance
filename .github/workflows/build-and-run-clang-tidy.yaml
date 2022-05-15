@@ -1,4 +1,4 @@
-name: clang-tidy
+name: build-and-run-clang-tidy
 
 on: [ pull_request ]
 
@@ -24,7 +24,7 @@ jobs:
 
     - uses: egor-tensin/setup-gcc@v1
 
-    - uses: uses: KyleMayes/install-llvm-action@v1.5.2
+    - uses: KyleMayes/install-llvm-action@v1.5.2
 
     - name: Configure CMake
       run: |
