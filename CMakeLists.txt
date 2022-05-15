@@ -4,6 +4,7 @@ set(VERSION 0.1.0)
 
 project(concordance VERSION ${VERSION} LANGUAGES CXX)
 
-include(cmake/compile_options.txt)
-include(cmake/tests.txt)
+include(cmake/sources.cmake)
+include(cmake/compile_options.cmake)
+include(cmake/tests.cmake)
 

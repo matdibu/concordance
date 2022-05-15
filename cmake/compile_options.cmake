@@ -1,8 +1,3 @@
-add_executable(${PROJECT_NAME} src/main.cpp ${HEADER_FILES})
-
-configure_file(include/config.h.in config.h)
-target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}")
-
 set_target_properties(${PROJECT_NAME} PROPERTIES
     EXPORT_COMPILE_COMMANDS ON
     CXX_STANDARD 20
