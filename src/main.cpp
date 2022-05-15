@@ -37,7 +37,7 @@ occurs_to_comma_list(const sentence_freq_t& occurance_map)
   return result_stream.str();
 }
 
-constexpr static bool
+static bool
 is_sententce_transition(const std::string& lhs, const std::string& rhs)
 {
   if (lhs.ends_with('.')) {
