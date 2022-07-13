@@ -3,6 +3,8 @@
 
 Create an alphabetical list of all word occurrences, labeled with word frequencies.
 
+This project was mainly intended to be used as a playground for GitHub actions.
+
 Build prerequisites
 -------------------
 
